@@ -49,7 +49,7 @@ compatibility: codex,copilot
 - 長期追跡したい Web/API/仕様書など、再取得可能な外部一次情報を根拠として残したい場合にだけ任意で使う。
 - 一時的なローカルパスや、このマシン固有の参照を根拠として manifest に記録する前提にはしない。
 - 実装方式は毎回比較して選ぶ。候補は 公式CLI / SDK / 直接HTTP。
-- 公式CLI が最適な場合は、直接グローバルインストールせず Nix 経由で導入する。
+- 公式CLI が最適な場合は、直接インストールを既定にせず、まず `nix-home` の既存実装で Nix / Homebrew / 公式導線のどれを採っているか確認する。
 - 外部 API 系の skill は、実装前に実 URL・実認証・最小リクエストでプリフライト疎通を行う。
 
 ### 4. 品質ゲート
@@ -81,7 +81,7 @@ compatibility: codex,copilot
 - `compatibility: codex,copilot` が入っている
 - Codex / Copilot の扱いが本文に明記されている
 - `source-manifest` を使う場合だけ、その内容が妥当である
-- 公式CLI 採用時は Nix 経由の前提が守られている
+- 公式CLI 採用時は、`nix-home` の既存導入方針と矛盾しない
 - ユーザーに直接 CLI 実行を要求していない
 - 検証が通っている
 

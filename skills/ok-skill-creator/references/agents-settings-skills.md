@@ -24,9 +24,9 @@
 
 ## 依存ツール方針
 
-- Skill 実装で公式CLIを使う場合、グローバル導入は Nix 経由に統一する。
-- attr 探索は `ok-search`、導入は `ok-install` を使う。
-- `npm -g` / `pip install` / `go install` / `cargo install` / `brew install` / `curl | sh` をグローバル導入手段として使わない。
+- Skill 実装で公式CLIを使う場合、グローバル導入方法は `nix-home` の既存方針に合わせる。
+- Nix 追加が適切なケースでは attr 探索は `ok-search`、導入は `ok-install` を使う。
+- `npm -g` / `pip install` / `go install` / `cargo install` / `brew install` / `curl | sh` を、その場しのぎのグローバル導入手段として勝手に実行しない。
 
 ## 安全ルール
 

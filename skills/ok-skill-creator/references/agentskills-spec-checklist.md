@@ -28,7 +28,7 @@
 ## 実装方式
 
 - 公式CLI / SDK / 直接HTTP を比較して選定理由を残す。
-- 公式CLIを使う場合は Nix 経由で導入する（`ok-search` + `ok-install`）。
+- 公式CLIを使う場合は `nix-home` の既存導入方針に合わせる。Nix 追加なら `ok-search` + `ok-install` を使う。
 - ユーザーに直接CLI/スクリプト実行を要求しない。
 - 実行主体がエージェントであることを `User Interaction Contract` で明記する。
 - 状態変更系の操作は実行前確認を必須にし、確認ターン後にのみ実行する。

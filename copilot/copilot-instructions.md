@@ -8,7 +8,7 @@
 - `git config --global` `--local` `--system` を変更しない。
 - `git commit --author` を使わない。
 - コミットメッセージに `Co-Authored-By` を入れない。
-- `npm install -g` `pip install` `go install` `cargo install` `brew install` `curl | sh` などでグローバルツールを直接入れない。必要なツールは `~/nix-home` の設定を更新して Nix 経由で導入する。
+- ユーザー合意なしに `npm install -g` `pip install` `go install` `cargo install` `brew install` `curl | sh` などで、その場しのぎのグローバル導入を行わない。必要なツールは、まず `~/nix-home` の既存方針と実装を確認し、その repo で採用済みの導入経路に合わせて追加する。再現性が高い CLI や設定は Nix を優先しつつ、更新頻度・ビルド時間・公式サポートの都合で Homebrew や公式導線を使う既存運用がある場合はそれを尊重する。
 
 ## 基本方針
 
@@ -42,5 +42,5 @@
 ## AI エージェント環境
 
 - AI エージェント関連は、静的ベースラインと runtime / local state を分けて扱う。
-- Nix や dotfiles で管理するのは、共通指示、長期保持したい agent 固有指示、共通 skill、設定ディレクトリの土台、必要最小限の静的設定を優先する。
+- 宣言的に管理するのは、共通指示、長期保持したい agent 固有指示、共通 skill、設定ディレクトリの土台、必要最小限の静的設定を優先する。
 - MCP の有効化状態、認証情報、セッション、実験的なローカル設定、agent が生成・更新するファイルは、原則として宣言的管理へ戻さない。

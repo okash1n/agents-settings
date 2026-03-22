@@ -1,6 +1,6 @@
 ---
 name: ok-install
-description: nix-home でグローバルCLIを追加・適用・検証する。ユーザーが「グローバルインストールして」「npm -g の代わりに Nix で入れて」「caddy や marp を追加して switch までして」などを依頼したときに使う。~/nix-home/modules/home/base.nix を更新し、make build と make switch、command -v 検証まで実行する。
+description: nix-home で Nix 管理のグローバルCLIを追加・適用・検証する。ユーザーが「Nix で入れて」「caddy や marp を追加して switch までして」など、Nix 側へ追加したい依頼をしたときに使う。~/nix-home/modules/home/base.nix を更新し、make build と make switch、command -v 検証まで実行する。
 compatibility: codex,copilot
 ---
 
@@ -8,7 +8,7 @@ compatibility: codex,copilot
 
 ## 目的
 
-`~/nix-home` を唯一のグローバルツール導入経路として使い、以下を1回の流れで完了する。
+`~/nix-home` の Nix 管理に追加したい CLI について、以下を1回の流れで完了する。
 
 1. package 追加
 2. `make build`
@@ -20,6 +20,7 @@ compatibility: codex,copilot
 - `~/nix-home` が存在する。
 - `make build` / `make switch` が使える。
 - macOS の権限要件（App Management など）で `switch` が止まる可能性を考慮する。
+- Homebrew や npm global を使う既存運用のツール追加には使わない。導入経路が未確定なら、先に repo の実装と README を確認する。
 
 ## 手順
 

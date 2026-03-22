@@ -4,6 +4,9 @@ approvals_reviewer = "user"
 [projects."/Users/okash1n/nix-home"]
 trust_level = "trusted"
 
+[projects."/Users/okash1n/Downloads"]
+trust_level = "trusted"
+
 [projects."/Users/okash1n"]
 trust_level = "trusted"
 
@@ -75,6 +78,9 @@ trust_level = "trusted"
 
 [notice]
 hide_full_access_warning = true
+
+[notice.model_migrations]
+"gpt-5.3-codex" = "gpt-5.4"
 
 [mcp_servers.notion]
 url = "https://mcp.notion.com/mcp"
