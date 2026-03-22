@@ -1,0 +1,4 @@
+interface:
+  display_name: "OK Skill Autotune"
+  short_description: "Tune a skill with binary evals and mutation logs"
+  default_prompt: "Use $ok-skill-autotune to improve an existing skill from the user's actual complaints. Convert those complaints into binary evals, try one mutation at a time, and log every experiment to results.tsv and changelog.md. Do not assume an infinite autonomous loop or a dashboard."

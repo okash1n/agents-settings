@@ -1,0 +1,83 @@
+{
+  "home_symlinks": [
+    {
+      "target": "~/.codex/AGENTS.md",
+      "source": "codex/AGENTS.md",
+      "kind": "file"
+    },
+    {
+      "target": "~/.codex/config.toml",
+      "source": "codex/config.toml",
+      "kind": "file"
+    },
+    {
+      "target": "~/.codex/skills",
+      "source": "codex/skills",
+      "kind": "skills_dir",
+      "agent": "codex"
+    },
+    {
+      "target": "~/.copilot/config.json",
+      "source": "copilot/config.json",
+      "kind": "file"
+    },
+    {
+      "target": "~/.copilot/copilot-instructions.md",
+      "source": "copilot/copilot-instructions.md",
+      "kind": "file"
+    },
+    {
+      "target": "~/.copilot/instructions/global.instructions.md",
+      "source": "copilot/instructions/global.instructions.md",
+      "kind": "file"
+    },
+    {
+      "target": "~/.copilot/lsp-config.json",
+      "source": "copilot/lsp-config.json",
+      "kind": "file"
+    },
+    {
+      "target": "~/.copilot/skills",
+      "source": "copilot/skills",
+      "kind": "skills_dir",
+      "agent": "copilot"
+    }
+  ],
+  "shared_skills": [
+    {
+      "name": "ok-git",
+      "source": "skills/ok-git",
+      "agents": ["codex", "copilot"]
+    },
+    {
+      "name": "ok-install",
+      "source": "skills/ok-install",
+      "agents": ["codex", "copilot"]
+    },
+    {
+      "name": "ok-jina",
+      "source": "skills/ok-jina",
+      "agents": ["codex", "copilot"]
+    },
+    {
+      "name": "ok-search",
+      "source": "skills/ok-search",
+      "agents": ["codex", "copilot"]
+    },
+    {
+      "name": "ok-skill-creator",
+      "source": "skills/ok-skill-creator",
+      "agents": ["codex", "copilot"]
+    },
+    {
+      "name": "ok-skill-autotune",
+      "source": "skills/ok-skill-autotune",
+      "agents": ["codex", "copilot"]
+    },
+    {
+      "name": "ok-uninstall",
+      "source": "skills/ok-uninstall",
+      "agents": ["codex", "copilot"]
+    }
+  ]
+}

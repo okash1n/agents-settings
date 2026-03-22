@@ -1,0 +1,102 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+approvals_reviewer = "user"
+[projects."/Users/okash1n/nix-home"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/kb"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/kindlescaner"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/hanabi-works/hanabi-theme"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/athenai-dev/athenai"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/b2bsaaskit"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/compdemocracy/polis"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/work"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/daily-work-report-lambda"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/crx-box-direct-link"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/isms-renewal-2026-workspace"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/cn-infra-design"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/ninja-miles-investigation"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/khikita/conference-manager"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/ml-fanest-spec"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/asana-cli"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/factorio-with-ai"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/midpoint-dev"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/blog.cloudnative.co.jp"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/agents-settings"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/pm-copilot"]
+trust_level = "trusted"
+
+[projects."/"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/.ssh"]
+trust_level = "trusted"
+
+[notice]
+hide_full_access_warning = true
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.drawio]
+command = "npx"
+args = ["-y", "@drawio/mcp"]
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["chrome-devtools-mcp@latest"]
+
+[mcp_servers.ms-learn]
+url = "https://learn.microsoft.com/api/mcp"
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[agents.git_operator]
+description = "ok-git helper を使って inspect / branch / commit / sync を安全に実行する Git 操作専用サブエージェント"
+config_file = "./agents/git_operator.toml"
+nickname_candidates = ["GitOps", "Brancher"]
+
+[features]
+multi_agent = true

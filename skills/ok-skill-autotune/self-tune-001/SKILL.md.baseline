@@ -1,0 +1,136 @@
+---
+name: ok-skill-autotune
+description: existing Skill を binary eval で反復改善するときに使う。1回に1つだけ prompt mutation を試し、results.tsv と changelog.md を残しながら、改善した変更だけを採用する。ダッシュボードや自律無限ループは前提にしない。
+compatibility: codex,copilot
+---
+
+# OK Skill Autotune
+
+## Overview
+
+既存の Skill を少しずつ改善するための skill。
+やることは 3 つに絞る。
+
+1. 良い出力を binary eval に落とす
+2. 1回に1つだけ mutation を試す
+3. `results.tsv` と `changelog.md` に結果を残す
+
+この skill は dashboard や無限ループを前提にしない。
+各 experiment は明示的に区切り、改善しなかった変更は捨てる。
+
+## Trigger Examples
+
+- 「この skill を autotune したい」
+- 「binary eval で skill の改善実験を回したい」
+- 「1 mutation ずつ試して結果ログを残したい」
+- 「この SKILL.md を少しずつ改善して」
+
+## User Interaction Contract
+
+- ユーザーに直接 CLI / スクリプト実行を要求しない。
+- 実験の初期化、ログ作成、検証実行はエージェントが代行する。
+- 実験開始前に、対象 skill と eval 条件だけを確認する。
+- 状態変更を伴う mutation は、必ず1回の確認ターンを挟んでから実行する。
+- 破壊的変更はしない。改善しなかった mutation は元に戻す。
+
+## Inputs To Confirm
+
+- 対象 skill の `SKILL.md` パス
+- テスト入力 3〜5 件
+- binary eval 3〜6 件
+- 1 mutation あたりの runs 数
+- 実験上限回数が必要かどうか
+
+## Workflow
+
+### 1. Baseline を固定する
+
+- 対象 skill を読み、何を改善したいかを短く言語化する。
+- binary eval を yes/no 判定に落とす。
+- `scripts/init_run.py --skill <path>` で run ディレクトリを作る。
+- baseline の `SKILL.md` を `SKILL.md.baseline` に保存する。
+- 変更前の skill で baseline を実行し、`results.tsv` に experiment `0` として記録する。
+
+### 2. Mutation を 1 つだけ入れる
+
+- failure の傾向を見て、直す点を 1 つに絞る。
+- 同時に複数の仮説を混ぜない。
+- 典型例:
+  - 曖昧な指示を具体化する
+  - 優先順位の低い位置にある重要指示を前へ出す
+  - recurring failure に対して anti-pattern を追加する
+  - 悪さをしている冗長な説明を削る
+
+### 3. 評価して keep / discard を決める
+
+- 同じ test inputs と同じ eval を使って再実行する。
+- score が改善したら keep する。
+- 同点または悪化なら discard し、`SKILL.md` を直前の keep 状態へ戻す。
+- 毎回 `results.tsv` と `changelog.md` を更新する。
+
+### 4. 止めどきを守る
+
+- 良い mutation が連続で出なくなったら止める。
+- 上限回数に達したら止める。
+- 無限に回し続ける前提では進めない。
+
+## Eval Rules
+
+- eval は必ず binary にする。
+- 1〜7 のような段階評価は使わない。
+- 「何を満たせば pass か」を短く明文化する。
+- eval 数は 3〜6 件に抑える。
+- eval 自体が target skill の output を不自然に縛っていないか確認する。
+
+## Log Artifacts
+
+run ディレクトリには最低限これを残す。
+
+- `results.tsv`
+- `changelog.md`
+- `evals.md`
+- `SKILL.md.baseline`
+
+`results.tsv` の列:
+
+```text
+experiment	score	max_score	pass_rate	status	change_summary
+```
+
+`changelog.md` には各 experiment ごとに次を書く。
+
+- 何を変えたか
+- なぜ効くと思ったか
+- keep/discard
+- どの eval が改善 / 悪化したか
+
+## Commands
+
+run ディレクトリ初期化:
+
+```bash
+scripts/init_run.py --skill /absolute/path/to/SKILL.md
+```
+
+run 名を明示する場合:
+
+```bash
+scripts/init_run.py --skill /absolute/path/to/SKILL.md --run-name experiment-a
+```
+
+## Keep / Discard Policy
+
+- keep:
+  - score が改善した
+  - 同点でも明確に単純化され、次の実験の土台として有利
+- discard:
+  - score が悪化した
+  - 同点だが複雑化した
+  - eval を誤魔化しているだけに見える
+
+## Notes
+
+- この skill は target skill の自動実行基盤自体までは提供しない。
+- 実行方法が skill ごとに異なるので、そこは対象 skill に合わせて設計する。
+- まずは手動寄りの実験ループで十分。dashboard や常駐オーケストレーションは後回しでよい。
+- `agents-settings` 配下の skill を対象にする場合は、必要なら `ok-skill-creator` の品質ゲートも併用する。
