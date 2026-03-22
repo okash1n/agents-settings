@@ -32,6 +32,11 @@
       "kind": "file"
     },
     {
+      "target": "~/.copilot/instructions/language-default.instructions.md",
+      "source": "copilot/instructions/language-default.instructions.md",
+      "kind": "file"
+    },
+    {
       "target": "~/.copilot/lsp-config.json",
       "source": "copilot/lsp-config.json",
       "kind": "file"
