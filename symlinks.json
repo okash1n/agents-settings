@@ -42,6 +42,11 @@
       "kind": "file"
     },
     {
+      "target": "~/.copilot/mcp-config.json",
+      "source": "copilot/mcp-config.json",
+      "kind": "file"
+    },
+    {
       "target": "~/.copilot/skills",
       "source": "copilot/skills",
       "kind": "skills_dir",

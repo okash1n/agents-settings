@@ -93,6 +93,10 @@ args = ["-y", "@drawio/mcp"]
 command = "npx"
 args = ["chrome-devtools-mcp@latest"]
 
+[mcp_servers.kb]
+command = "kb-mcp"
+args = ["serve"]
+
 [mcp_servers.ms-learn]
 url = "https://learn.microsoft.com/api/mcp"
 
