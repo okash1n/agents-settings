@@ -29,6 +29,18 @@ current_branch() {
   git symbolic-ref --quiet --short HEAD 2>/dev/null || true
 }
 
+has_upstream() {
+  local branch="${1:-}"
+  [[ -n "$branch" ]] || return 1
+  git rev-parse --abbrev-ref --symbolic-full-name "${branch}@{upstream}" >/dev/null 2>&1
+}
+
+has_remote_branch() {
+  local remote="${1:-}" branch="${2:-}"
+  [[ -n "$remote" && -n "$branch" ]] || return 1
+  git show-ref --verify --quiet "refs/remotes/${remote}/${branch}"
+}
+
 check_message() {
   local message="$1"
   if [[ "$message" == *"Co-Authored-By:"* || "$message" == *"Co-authored-by:"* ]]; then
@@ -249,11 +261,31 @@ cmd_sync() {
   fi
 
   git fetch --prune "$remote"
-  git pull --rebase "$remote" "$branch"
+
+  local has_upstream_ref=0 has_remote_ref=0
+  if has_upstream "$branch"; then
+    has_upstream_ref=1
+  fi
+  if has_remote_branch "$remote" "$branch"; then
+    has_remote_ref=1
+  fi
+
+  if [[ "$has_upstream_ref" -eq 1 || "$has_remote_ref" -eq 1 ]]; then
+    git pull --rebase "$remote" "$branch"
+  elif [[ "$push" -eq 0 ]]; then
+    echo "[ERROR] No upstream or remote branch found for: $branch" >&2
+    echo "[ERROR] Use sync --push for the first push, or push manually with -u." >&2
+    exit 1
+  fi
 
   if [[ "$push" -eq 1 ]]; then
-    git push "$remote" "$branch"
-    echo "[ok] synchronized and pushed: $remote/$branch"
+    if [[ "$has_upstream_ref" -eq 1 || "$has_remote_ref" -eq 1 ]]; then
+      git push "$remote" "$branch"
+      echo "[ok] synchronized and pushed: $remote/$branch"
+    else
+      git push -u "$remote" "$branch"
+      echo "[ok] pushed with upstream set: $remote/$branch"
+    fi
   else
     echo "[ok] synchronized: $remote/$branch (push skipped)"
   fi

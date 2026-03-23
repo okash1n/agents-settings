@@ -112,6 +112,10 @@ rebase pull + push:
 "$OK_GIT_SCRIPT" sync --push
 ```
 
+- `sync --push` は、既存 upstream があるブランチでは rebase pull の後に push する。
+- 初回 push で upstream 未設定かつリモートブランチ未作成の場合は、helper が `git push -u` 相当へ自動フォールバックする。
+- `sync` 単体は初回 push を自動で作らない。未設定ブランチで pull 先がない場合は停止する。
+
 ## 失敗時の対処
 
 - コンフリクト時は自動解決しない。競合ファイルを提示してユーザー確認後に進める。
