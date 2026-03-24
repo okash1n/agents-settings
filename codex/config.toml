@@ -108,5 +108,9 @@ description = "ok-git helper を使って inspect / branch / commit / sync を�
 config_file = "./agents/git_operator.toml"
 nickname_candidates = ["GitOps", "Brancher"]
 
+[agents]
+max_threads = 50
+max_depth = 10
+
 [features]
 multi_agent = true

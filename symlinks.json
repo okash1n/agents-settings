@@ -17,6 +17,16 @@
       "agent": "codex"
     },
     {
+      "target": "~/.claude/commands/dev-cycle.md",
+      "source": "claude/commands/dev-cycle.md",
+      "kind": "file"
+    },
+    {
+      "target": "~/.claude/commands/dev-one-cycle.md",
+      "source": "claude/commands/dev-one-cycle.md",
+      "kind": "file"
+    },
+    {
       "target": "~/.copilot/config.json",
       "source": "copilot/config.json",
       "kind": "file"
