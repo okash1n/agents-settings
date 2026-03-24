@@ -36,6 +36,8 @@
 
 **出力**: `00-review/<topic>-design.md`
 
+6. TodoWrite で `[x] Phase A: Design` にし、Phase B に自動遷移する
+
 ---
 
 ## Phase B: Plan（開発計画）
@@ -53,6 +55,8 @@
 
 **出力**: `00-review/<topic>-plan.md`
 
+6. TodoWrite で `[x] Phase B: Plan` にし、Phase C の Step Todo を展開して Phase C に自動遷移する
+
 ---
 
 ## Phase C: Run（PR 単位の開発サイクル）
@@ -64,8 +68,8 @@
 ### C-1: 実装
 
 1. 計画書から該当 PR のセクションを読み、変更内容・制約・依存を把握する
-2. 作業ブランチを作成する（命名規則: PR タイトルから導出）
-3. TodoWrite で PR 内のタスクを分解し、1 つずつ実装する
+2. TodoWrite で当該 PR の Step Todo（C-1〜C-6）を展開する
+3. 作業ブランチを作成する（命名規則: PR タイトルから導出）
 4. 各タスク完了時に lint/検証を実行する（プロジェクトに応じて `shellcheck`, `tsc`, `eslint` 等）
 5. 既存テストを実行し、リグレッションがないことを確認する
 
@@ -120,9 +124,41 @@
 
 ---
 
-## 注意事項
-
 ## 進行ルール
+
+### TodoWrite によるチェーン駆動
+
+各フェーズの完了時に「次フェーズの Todo を立てる」Todo を仕込み、チェーンが途切れないようにする。
+
+**開始時に立てる Todo（Phase レベル）**:
+
+```
+- [ ] Phase A: Design
+- [ ] Phase B: Plan
+- [ ] Phase B 完了後: Phase C の Step Todo を展開
+```
+
+**Phase B 完了時に展開**:
+
+```
+- [x] Phase A: Design
+- [x] Phase B: Plan
+- [ ] C-1: 実装
+- [ ] C-2: 内部レビュー
+- [ ] C-3: 指摘修正
+- [ ] C-4: PR 作成
+- [ ] C-5: 内部レビュー 2 周目
+- [ ] C-6: Bot レビュー対応 & 完了報告
+```
+
+**チェーンのポイント（2 箇所）**:
+
+1. **Phase A 完了時** → `[x]` にして Phase B に遷移
+2. **Phase B 完了時** → `[x]` にして Phase C の Step Todo を展開
+
+one-cycle は 1 PR で完結するため、C-8（次 PR 展開）や畳みルールは不要。
+
+### その他
 
 - **コンテキストが不足しそうな場合は自分で `/compact` する**。ユーザーに判断を委ねない
 

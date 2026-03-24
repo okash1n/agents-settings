@@ -42,6 +42,7 @@ helper の役割:
 3. 共通手順「内部レビュー」を実行する
 4. 指摘を修正し、全件クリアするまでループする
 5. 設計書の最終版を保存する
+6. `update_plan` で `Phase A: Design` を `completed` にし、`Phase B: Plan` を `in_progress` にして自動遷移する
 
 出力: `00-review/<topic>-design.md`
 
@@ -57,6 +58,7 @@ helper の役割:
 3. 共通手順「内部レビュー」を実行する
 4. 指摘を修正し、全件クリアするまでループする
 5. 計画書の最終版を保存する
+6. `update_plan` で `Phase B: Plan` を `completed` にし、Plan の結果から Phase C の PR 一覧 step を展開して Phase C に自動遷移する
 
 出力: `00-review/<topic>-plan.md`
 
@@ -69,12 +71,13 @@ helper の役割:
 ### C-1: 実装
 
 1. 計画書から該当 PR のセクションを読み、変更内容・制約・依存を把握する
-2. 作業ブランチを作成する
+2. `update_plan` で当該 PR の Step（C-1〜C-8）を展開する
+3. 作業ブランチを作成する
    - 命名規則は PR タイトルまたはリポジトリの既存慣習から導出する
-3. PR 内のタスクを分解し、1 つずつ実装する
-4. 各タスク完了時に lint / 検証を実行する
+4. PR 内のタスクを分解し、1 つずつ実装する
+5. 各タスク完了時に lint / 検証を実行する
    - プロジェクトに応じて `shellcheck`, `tsc`, `eslint` など
-5. 既存テストを実行し、リグレッションがないことを確認する
+6. 既存テストを実行し、リグレッションがないことを確認する
 
 ### C-2: 内部レビュー 1 周目
 
@@ -117,8 +120,9 @@ helper の役割:
 
 ### C-8: 次の PR へ
 
-21. 計画書の次の PR に進む。ユーザーに確認せず即座に C-1 に戻る
-22. 計画書の全 PR が完了したら Phase D（アーカイブ）に進む
+21. 完了した PR の Step（C-1〜C-8）を plan から外し、親 step `Phase C: PR-N` を `completed` に畳む
+22. 計画書の次の PR がある場合は、次 PR の Step を展開し、ユーザーに確認せず即座に C-1 に戻る
+23. 計画書の全 PR が完了したら Phase D（アーカイブ）に進む
 
 ## Phase D: Archive（完了後のアーカイブ）
 
@@ -171,7 +175,56 @@ claude -p \
 
 ## 進行ルール
 
-- task-tracking を使う場合は PR レベルで切る。PR 内の個別タスクを過剰に細かく管理しない
+### `update_plan` によるチェーン駆動
+
+各フェーズの完了時に「次フェーズの step を立てる」更新を行い、チェーンが途切れないようにする。
+
+開始時に立てる step（Phase レベル）:
+
+```text
+- [in_progress] Phase A: Design
+- [pending] Phase B: Plan
+- [pending] Phase B 完了後: Plan の結果から Phase C の PR 一覧 step を展開
+```
+
+Phase B 完了時に展開する step:
+
+```text
+- [completed] Phase A: Design
+- [completed] Phase B: Plan
+- [pending] Phase C: PR-1 (<タイトル>)
+- [pending] Phase C: PR-2 (<タイトル>)
+- [pending] Phase C: PR-N (<タイトル>)
+- [pending] Phase D: Archive
+```
+
+各 PR 開始時に展開する step:
+
+```text
+- [in_progress] PR-1 / C-1: 実装
+- [pending] PR-1 / C-2: 内部レビュー
+- [pending] PR-1 / C-3: 指摘修正
+- [pending] PR-1 / C-4: PR 作成
+- [pending] PR-1 / C-5: 内部レビュー 2 周目
+- [pending] PR-1 / C-6: Bot レビュー対応
+- [pending] PR-1 / C-7: マージ & リリース
+- [pending] PR-1 / C-8: 完了した Step を畳み、次 PR の Step を展開
+```
+
+チェーンのポイント（3 箇所）:
+
+1. Phase B 完了時 → Plan の結果から PR 一覧の step を立てる
+2. 各 PR 開始時 → その PR の Step を展開する
+3. C-8 → 完了した PR の Step を plan から外し、親 step を `completed` にし、次 PR の Step を展開する
+
+フラット運用のルール:
+
+- `PR-1 / C-1: 実装` のような prefix 付き step で表現する
+- 完了した PR の C-1〜C-8 は plan から外し、親 step `Phase C: PR-N` だけを `completed` として残す
+- plan は常時 15〜20 行程度に収まるよう維持する
+
+### その他
+
 - PR 間で止まらない。ユーザーに確認・報告・提案をせず、即座に次の PR の Phase C-1 に入る
 - コンテキストが不足しそうな場合は自分で compact や要約を行う。ユーザーに判断を委ねない
 - Bot レビューが来ていない場合はスキップして進む。後で来たら戻って対応する
