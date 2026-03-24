@@ -7,5 +7,9 @@
 !ok-skill-autotune
 !ok-skill-creator
 !ok-uninstall
+!dev-cycle
+!dev-cycle/**
+!dev-one-cycle
+!dev-one-cycle/**
 !verify
 !verify/**
