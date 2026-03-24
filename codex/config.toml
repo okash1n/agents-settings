@@ -114,3 +114,4 @@ max_depth = 10
 
 [features]
 multi_agent = true
+codex_hooks = true

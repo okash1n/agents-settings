@@ -11,6 +11,11 @@
       "kind": "file"
     },
     {
+      "target": "~/.codex/hooks.json",
+      "source": "codex/hooks.json",
+      "kind": "file"
+    },
+    {
       "target": "~/.codex/skills",
       "source": "codex/skills",
       "kind": "skills_dir",
@@ -24,6 +29,11 @@
     {
       "target": "~/.claude/commands/dev-one-cycle.md",
       "source": "claude/commands/dev-one-cycle.md",
+      "kind": "file"
+    },
+    {
+      "target": "~/.claude/output-styles/osaka.md",
+      "source": "claude/output-styles/osaka.md",
       "kind": "file"
     },
     {

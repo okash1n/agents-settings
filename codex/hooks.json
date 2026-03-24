@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/okash1n/.local/lib/kb-mcp/hooks/codex-session-end.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
