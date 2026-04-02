@@ -14,5 +14,12 @@
     "host": "https://github.com",
     "login": "okash1n"
   },
-  "alt_screen": false
+  "alt_screen": false,
+  "hooks": {
+    "session-end": [
+      {
+        "bash": "KB_JUDGE_FASTPATH_COMMAND=\"/Users/okash1n/.local/lib/kb-mcp/hooks/heuristic-fastpath.py\" /Users/okash1n/.local/lib/kb-mcp/hooks/copilot-session-end.sh"
+      }
+    ]
+  }
 }

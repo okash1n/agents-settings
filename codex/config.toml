@@ -76,6 +76,9 @@ trust_level = "trusted"
 [projects."/Users/okash1n/.ssh"]
 trust_level = "trusted"
 
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/cn-route53"]
+trust_level = "trusted"
+
 [notice]
 hide_full_access_warning = true
 
@@ -103,6 +106,10 @@ url = "https://learn.microsoft.com/api/mcp"
 [mcp_servers.linear]
 url = "https://mcp.linear.app/mcp"
 
+[mcp_servers.ping-identity-docs]
+url = "https://45kqphay5vfkv5wqvslrxjgkwa0zhifn.lambda-url.ap-northeast-1.on.aws/mcp"
+bearer_token_env_var = "PING_MCP_AUTH_TOKEN"
+
 [agents.git_operator]
 description = "ok-git helper を使って inspect / branch / commit / sync を安全に実行する Git 操作専用サブエージェント"
 config_file = "./agents/git_operator.toml"
@@ -115,3 +122,6 @@ max_depth = 10
 [features]
 multi_agent = true
 codex_hooks = true
+
+[plugins."github@openai-curated"]
+enabled = true

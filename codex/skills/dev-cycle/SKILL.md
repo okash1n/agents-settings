@@ -22,13 +22,43 @@ dev-cycle run <plan-file> [PR-N]       → 指定 PR から開発サイクルを
 
 すべてのサブコマンドの前に実行する:
 
-1. `scripts/review_workspace.sh init` を実行する
-2. helper が失敗したら停止し、失敗内容を報告する
+1. まず「レビュー用ワークスペースが初期化済みの状態」を満たす
+2. 初期化 helper が利用できる場合はそれを使う
+3. helper が見つからない場合は、同等の初期化を手動で行う
+4. helper も手動代替も失敗した場合だけ停止し、失敗内容を報告する
+
+初期化済みの状態:
+
+- プロジェクトルートに `00-review/` が存在する
+- `.git/info/exclude` に `00-review/` が含まれ、レビュー成果物が Git 追跡されない
+
+helper の探索順:
+
+1. skill ディレクトリに同梱された helper
+2. 対象リポジトリの `scripts/review_workspace.sh`
+
+helper が見つかった場合の実行:
+
+1. `review_workspace.sh init` を実行する
+2. 成功したら続行する
+3. 失敗したら、手動代替が安全に再現できるか確認する
+
+手動代替:
+
+1. `00-review/` を作成する
+2. `.git/info/exclude` に `00-review/` がなければ追記する
+3. 期待状態を満たしたことを確認して続行する
 
 helper の役割:
 
 - プロジェクトルートに `00-review/` を作成する
 - `.git/info/exclude` に `00-review/` がなければ追記する
+
+注意:
+
+- helper の存在を対象リポジトリの必須前提として扱わない
+- 必須なのは helper コマンドではなく、初期化済みの状態である
+- repo ごとの差異で helper が無い場合でも、同じ状態を安全に作れるなら停止せず続行する
 
 ## Phase A: Design（設計）
 

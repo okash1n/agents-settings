@@ -22,6 +22,11 @@
       "agent": "codex"
     },
     {
+      "target": "~/.codex/agents",
+      "source": "codex/agents",
+      "kind": "dir"
+    },
+    {
       "target": "~/.claude/commands/dev-cycle.md",
       "source": "claude/commands/dev-cycle.md",
       "kind": "file"

@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/okash1n/.local/lib/kb-mcp/hooks/codex-session-end.sh"
+            "command": "KB_JUDGE_FASTPATH_COMMAND=\"/Users/okash1n/.local/lib/kb-mcp/hooks/heuristic-fastpath.py\" /Users/okash1n/.local/lib/kb-mcp/hooks/codex-session-end.sh"
           }
         ]
       }

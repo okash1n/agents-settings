@@ -132,7 +132,7 @@
 **全フェーズ (A/B/C) で共通の並列レビュー手順**:
 
 1. **N 観点の内部レビューサブエージェント** (code-reviewer 等): 対象に応じた観点で検証
-2. **N 観点の Codex 委譲サブエージェント** (general-purpose → mcp__codex__codex): 同数のサブエージェントを立て、各自が Codex MCP にレビューを委譲する
+2. **N 観点の Codex 委譲サブエージェント** (general-purpose → codex:codex-rescue): 同数のサブエージェントを立て、各自が Codex Plugin にレビューを委譲する
 3. 合計 2N 個のサブエージェントを **1 つのメッセージで並列起動** する
 4. 全結果を集約し、指摘を severity (CRITICAL/HIGH/MEDIUM/LOW/SUGGESTION) 別に一覧化する
 5. CRITICAL → HIGH → MEDIUM の順に修正し、再レビュー → **指摘ゼロまでループ**
@@ -204,7 +204,7 @@
 ## 注意事項
 
 - main に直接コミットしない。必ず PR 経由
-- Codex レビューは直接 MCP を叩かず、サブエージェント経由で委譲する
+- Codex レビューは直接 Plugin コマンドを叩かず、サブエージェント経由で委譲する
 - PR 間で確認を入れず、計画書の最後まで一気に回す
 - 各 PR のバージョン番号は計画書に従う
 - `00-review/` は `.git/info/exclude` で除外し、リポジトリにコミットしない

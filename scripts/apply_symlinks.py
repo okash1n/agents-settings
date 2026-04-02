@@ -148,6 +148,10 @@ def apply_home_symlinks(manifest: dict, repo_root: Path, managed_skill_names: di
             replace_skills_dir_with_symlink(target, source, managed_skill_names.get(agent, set()))
             continue
 
+        if kind == "dir":
+            ensure_symlink(target, source)
+            continue
+
         raise SystemExit(f"unknown symlink kind: {kind}")
 
 
