@@ -29,13 +29,12 @@ dev-cycle run <plan-file> [PR-N]       → 指定 PR から開発サイクルを
 
 初期化済みの状態:
 
-- プロジェクトルートに `00-review/` が存在する
-- `.git/info/exclude` に `00-review/` が含まれ、レビュー成果物が Git 追跡されない
+- プロジェクトルートに、利用可能な `00-review/` が存在する
+- `00-review/` は通常ディレクトリでも `zz` 側を向く symlink でもよい
 
 helper の探索順:
 
 1. skill ディレクトリに同梱された helper
-2. 対象リポジトリの `scripts/review_workspace.sh`
 
 helper が見つかった場合の実行:
 
@@ -45,20 +44,21 @@ helper が見つかった場合の実行:
 
 手動代替:
 
-1. `00-review/` を作成する
-2. `.git/info/exclude` に `00-review/` がなければ追記する
-3. 期待状態を満たしたことを確認して続行する
+1. `00-review/` が無ければ作成する
+2. `00-review/` がディレクトリまたはディレクトリ symlink であることを確認する
+3. それ以外の実体がある場合は停止し、競合を報告する
 
 helper の役割:
 
-- プロジェクトルートに `00-review/` を作成する
-- `.git/info/exclude` に `00-review/` がなければ追記する
+- プロジェクトルートに利用可能な `00-review/` を確保する
+- 既存の競合パスがあれば停止する
 
 注意:
 
 - helper の存在を対象リポジトリの必須前提として扱わない
 - 必須なのは helper コマンドではなく、初期化済みの状態である
 - repo ごとの差異で helper が無い場合でも、同じ状態を安全に作れるなら停止せず続行する
+- ignore の責務は global ignore と `zz` 運用側にあり、この skill では Git ignore 設定を変更しない
 
 ## Phase A: Design（設計）
 
@@ -262,6 +262,6 @@ Phase B 完了時に展開する step:
 ## 注意事項
 
 - `main` に直接コミットしない。必ず PR 経由
-- `00-review/` は `.git/info/exclude` で除外し、リポジトリにコミットしない
+- `00-review/` は global ignore と `zz` 運用を前提に、リポジトリへコミットしない
 - `claude -p` レビューは親エージェントが直接実行せず、必ずサブエージェント経由で委譲する
 - 多角的レビューは必須機能であり、省略しない

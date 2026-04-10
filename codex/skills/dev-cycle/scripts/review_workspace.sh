@@ -10,13 +10,16 @@ fi
 
 case "$cmd" in
   init)
-    mkdir -p 00-review
-    mkdir -p .git/info
-    touch .git/info/exclude
+    if [[ -e 00-review || -L 00-review ]]; then
+      if [[ -d 00-review ]]; then
+        exit 0
+      fi
 
-    if ! grep -Fxq '00-review/' .git/info/exclude; then
-      printf '\n00-review/\n' >> .git/info/exclude
+      echo "00-review exists but is not a directory: $(pwd)/00-review" >&2
+      exit 1
     fi
+
+    mkdir -p 00-review
     ;;
   *)
     echo "unknown command: $cmd" >&2
