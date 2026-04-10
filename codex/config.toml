@@ -79,6 +79,12 @@ trust_level = "trusted"
 [projects."/Users/okash1n/ghq/github.com/cloudnative-co/cn-route53"]
 trust_level = "trusted"
 
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/board-reporter"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/work"]
+trust_level = "trusted"
+
 [notice]
 hide_full_access_warning = true
 
