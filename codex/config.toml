@@ -1,4 +1,4 @@
-model = "gpt-5.4"
+model = "gpt-5.5"
 model_reasoning_effort = "medium"
 approvals_reviewer = "user"
 [projects."/Users/okash1n/nix-home"]
@@ -85,6 +85,30 @@ trust_level = "trusted"
 [projects."/Users/okash1n/ghq/github.com/okash1n/work"]
 trust_level = "trusted"
 
+[projects."/Users/okash1n/ghq/github.com/okash1n/zz"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/claude-code-starter-kit"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/btajp/corp-engr-output-aggregator"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/shipprove/ecotrial"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/shipprove/semverdict"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/shipprove/packtrial"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/kb"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/blog.cloudnative.co.jp"]
+trust_level = "trusted"
+
 [notice]
 hide_full_access_warning = true
 
@@ -101,10 +125,6 @@ args = ["-y", "@drawio/mcp"]
 [mcp_servers.chrome-devtools]
 command = "npx"
 args = ["chrome-devtools-mcp@latest"]
-
-[mcp_servers.kb]
-command = "kb-mcp"
-args = ["serve"]
 
 [mcp_servers.ms-learn]
 url = "https://learn.microsoft.com/api/mcp"
@@ -131,3 +151,28 @@ codex_hooks = true
 
 [plugins."github@openai-curated"]
 enabled = true
+
+[plugins."browser-use@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[marketplaces.openai-bundled]
+last_updated = "2026-04-30T10:56:05Z"
+source_type = "local"
+source = "/Users/okash1n/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-04-30T10:56:21Z"
+source_type = "local"
+source = "/Users/okash1n/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"

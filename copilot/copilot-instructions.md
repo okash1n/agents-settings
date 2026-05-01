@@ -9,6 +9,7 @@
 - `git commit --author` を使わない。
 - コミットメッセージに `Co-Authored-By` を入れない。
 - ユーザー合意なしに `npm install -g` `pip install` `go install` `cargo install` `brew install` `curl | sh` などで、その場しのぎのグローバル導入を行わない。必要なツールは、まず `~/nix-home` の既存方針と実装を確認し、その repo で採用済みの導入経路に合わせて追加する。再現性が高い CLI や設定は Nix を優先しつつ、更新頻度・ビルド時間・公式サポートの都合で Homebrew や公式導線を使う既存運用がある場合はそれを尊重する。
+- リポジトリ内の `00-` から始まるディレクトリは global の gitignore で無視される作業用ディレクトリとして扱い、リポジトリの実コード、ドキュメント、GitHub の Issue / PR、コミットメッセージなどに、その存在・パス・内容を含めない。
 
 ## 基本方針
 

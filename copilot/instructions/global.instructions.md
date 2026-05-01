@@ -7,3 +7,4 @@
 - `gh` コメント投稿では、一時ファイルや本文に一意な先頭行を入れて、投稿後に `gh api repos/<owner>/<repo>/issues/comments/<id>` または `gh api repos/<owner>/<repo>/issues/<number>/comments` で author・body・URL を確認する。
 - `gh` の確認では「最新コメント URL を拾えた」だけで完了扱いにせず、自分が想定した本文が実際に投稿されていることまで確認する。
 - VS Code Chat 経由で `gh` を使うと terminal wrapper の都合で出力が崩れることがあるため、成功パターンは「`--body-file` で投稿 -> `gh api ... --jq` で URL/author/body を検証」とする。
+- リポジトリ内の `00-` から始まるディレクトリは global の gitignore で無視される作業用ディレクトリとして扱い、リポジトリの実コード、ドキュメント、GitHub の Issue / PR、コミットメッセージなどに、その存在・パス・内容を含めない。
