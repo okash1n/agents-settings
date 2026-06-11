@@ -1,6 +1,11 @@
 model = "gpt-5.5"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "xhigh"
 approvals_reviewer = "user"
+notify = ["/Users/okash1n/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+service_tier = "fast"
+
 [projects."/Users/okash1n/nix-home"]
 trust_level = "trusted"
 
@@ -109,6 +114,54 @@ trust_level = "trusted"
 [projects."/Users/okash1n/ghq/github.com/cloudnative-co/blog.cloudnative.co.jp"]
 trust_level = "trusted"
 
+[projects."/Users/okash1n/ghq/github.com/btajp/vibe-coding-starter"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/naccord/naccord"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/cloudnative.co.jp-site"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/x-motemen/ghq"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/Documents/PingOne"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/Documents/会社ブログ"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/btajp/corp-engr-website"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/ghost-writer-okash1n"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/btajp/corp-engr-admin"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/aws"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/btajp/btajp-platform"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/blog-fact-check"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/eliminate-ad-book"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/btajp/btajp-org-site"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/btajp/btcon_website"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/blog-to-sns"]
+trust_level = "trusted"
+
 [notice]
 hide_full_access_warning = true
 
@@ -136,6 +189,25 @@ url = "https://mcp.linear.app/mcp"
 url = "https://45kqphay5vfkv5wqvslrxjgkwa0zhifn.lambda-url.ap-northeast-1.on.aws/mcp"
 bearer_token_env_var = "PING_MCP_AUTH_TOKEN"
 
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/okash1n/.codex"
+CODEX_HOME = "/Users/okash1n/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "72614174f4dad67a58d46a3ac759cffb45c92fa48a293af4c4ea35102ba391ba"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.608.12217"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
+
 [agents.git_operator]
 description = "ok-git helper を使って inspect / branch / commit / sync を安全に実行する Git 操作専用サブエージェント"
 config_file = "./agents/git_operator.toml"
@@ -148,11 +220,10 @@ max_depth = 10
 [features]
 multi_agent = true
 codex_hooks = true
+goals = true
+js_repl = false
 
 [plugins."github@openai-curated"]
-enabled = true
-
-[plugins."browser-use@openai-bundled"]
 enabled = true
 
 [plugins."documents@openai-primary-runtime"]
@@ -164,15 +235,66 @@ enabled = true
 [plugins."presentations@openai-primary-runtime"]
 enabled = true
 
+[plugins."notion@openai-curated"]
+enabled = true
+
+[plugins."slack@openai-curated"]
+enabled = true
+
+[plugins."box@openai-curated"]
+enabled = true
+
+[plugins."asana@openai-curated"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-04-30T10:56:05Z"
+last_updated = "2026-06-11T00:11:57Z"
 source_type = "local"
 source = "/Users/okash1n/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-04-30T10:56:21Z"
+last_updated = "2026-06-01T18:35:51Z"
 source_type = "local"
 source = "/Users/okash1n/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[desktop]
+appearanceTheme = "dark"
+appearanceDarkCodeThemeId = "dracula"
+usePointerCursors = true
+reduced-motion-preference = "on"
+keepRemoteControlAwakeWhilePluggedIn = true
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#ff79c6"
+contrast = 46
+ink = "#f8f8f2"
+opaqueWindows = true
+surface = "#282a36"
+
+[desktop.appearanceDarkChromeTheme.fonts]
+ui = "'LINE Seed JP'"
+code = "'HackGen Console NF'"
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#50fa7b"
+diffRemoved = "#ff5555"
+skill = "#ff79c6"
+
+[desktop.open-in-target-preferences]
+global = "fileManager"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/okash1n/ghq/github.com/cloudnative-co/blog.cloudnative.co.jp" = "fileManager"
+"/Users/okash1n/ghq/github.com/cloudnative-co/ghost-writer-okash1n" = "fileManager"
