@@ -42,6 +42,11 @@
       "kind": "file"
     },
     {
+      "target": "~/.claude/rules/user-preferences.md",
+      "source": "claude/rules/user-preferences.md",
+      "kind": "file"
+    },
+    {
       "target": "~/.copilot/config.json",
       "source": "copilot/config.json",
       "kind": "file"
@@ -82,37 +87,58 @@
     {
       "name": "ok-git",
       "source": "skills/ok-git",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     },
     {
       "name": "ok-install",
       "source": "skills/ok-install",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     },
     {
       "name": "ok-jina",
       "source": "skills/ok-jina",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     },
     {
       "name": "ok-search",
       "source": "skills/ok-search",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     },
     {
       "name": "ok-skill-creator",
       "source": "skills/ok-skill-creator",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     },
     {
       "name": "ok-skill-autotune",
       "source": "skills/ok-skill-autotune",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     },
     {
       "name": "ok-uninstall",
       "source": "skills/ok-uninstall",
-      "agents": ["codex", "copilot"]
+      "agents": [
+        "codex",
+        "copilot"
+      ]
     }
   ]
 }
