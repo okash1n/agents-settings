@@ -35,3 +35,4 @@ python3 scripts/apply_symlinks.py
 - `symlinks.json` に載っているものだけが repo 管理の symlink
 - `*/skills` 配下の `ok-*` は repo 管理の共通 skill
 - `codex/skills/.system` や `kb-*`、`copilot/skills/ok-mcp-toggle` など manifest にないものは local runtime state として扱い、Git 追跡しない
+- `~/.copilot/config.json` は CLI が自動管理する内部状態のため repo 管理しない（ユーザー設定は `copilot/settings.json` で管理する）
