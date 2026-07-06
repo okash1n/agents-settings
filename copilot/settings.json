@@ -4,13 +4,5 @@
   "banner": "never",
   "includeCoAuthoredBy": false,
   "model": "claude-opus-4.8-fast",
-  "effortLevel": "xhigh",
-  "hooks": {
-    "sessionEnd": [
-      {
-        "type": "command",
-        "bash": "H=/Users/okash1n/.local/lib/kb-mcp/hooks; if [ -x \"$H/copilot-session-end.sh\" ]; then KB_JUDGE_FASTPATH_COMMAND=\"$H/heuristic-fastpath.py\" \"$H/copilot-session-end.sh\"; fi"
-      }
-    ]
-  }
+  "effortLevel": "xhigh"
 }
