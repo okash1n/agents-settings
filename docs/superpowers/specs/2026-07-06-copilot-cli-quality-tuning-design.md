@@ -86,6 +86,8 @@ GitHub Copilot CLI を本格利用するにあたり、claude-code-starter-kit �
 - リスクと対策: hooks 移設で kb-mcp session-end hook が壊れないことを実装時に必ず確認する（設定ロードは `copilot --list-env` で、hook 発火はテストセッションで確認）。
 
 > 実装時追記（2026-07-06）: 実装開始時点で CLI 自身が設定移行を完了しており、`~/.copilot/config.json` は既に自動管理の実ファイル、`~/.copilot/settings.json` は CLI 生成の実ファイルになっていた（設計時の「settings.json 不在」から状況が変化）。このため本節の実作業は「CLI 生成の settings.json を是正した上で宣言的管理（symlink）に置き換え、repo 側 config.json を削除する」となった。`--list-env` フラグは現行 CLI に存在しなかったため、設定ロードの確認は非対話実行とセッションステート（model 反映）・ログ（hook 発火）で行った。また移植 skill 名はビルトイン `/security-review` コマンドとの衝突を避けるため `security-checklist` に変更した。kb-mcp の hook スクリプトは実機から消えており（3 月以降のアンインストールとみられる。今回の移行とは無関係の既存問題）、hook は存在チェック付きガードに変更して保全した。
+>
+> モデルコストの確認結果（2026-07-06、docs.github.com の supported-models / requests ページより）: 旧設定の Claude Opus 4.6 (fast mode) は 2026-06-29 に廃止済みで、公式指定の後継が Claude Opus 4.8 (fast mode)（本設計の採用モデル）。課金は premium request 倍率（レガシー）からトークンベースの AI credits に移行しており、固定倍率は存在しない。公式ドキュメントは「reasoning レベルを上げると消費 credits が増える」と明記しているため、`effortLevel: "xhigh"` は品質優先とコスト増のトレードオフとして採用した（スモーク実測: 単純プロンプト 1 回で 13.6〜32 credits）。
 
 ### D. 配備と検証
 
