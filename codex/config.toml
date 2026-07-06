@@ -162,6 +162,21 @@ trust_level = "trusted"
 [projects."/Users/okash1n/ghq/github.com/cloudnative-co/blog-to-sns"]
 trust_level = "trusted"
 
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/no9sys/helpdesk"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/okash1n/rrr"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/ghq/github.com/cloudnative-co/recruit-manager"]
+trust_level = "trusted"
+
+[projects."/Users/okash1n/Documents/Codex/2026-07-03/ca"]
+trust_level = "trusted"
+
 [notice]
 hide_full_access_warning = true
 
@@ -200,12 +215,12 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_nod
 NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/okash1n/.codex"
 CODEX_HOME = "/Users/okash1n/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "72614174f4dad67a58d46a3ac759cffb45c92fa48a293af4c4ea35102ba391ba"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "d5cbb8ec1ee520cba7943b1e1accb6b25acd9941ea4e2e9e4dbcf25ff9983a2d"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.608.12217"
+BROWSER_USE_CODEX_APP_VERSION = "26.623.70822"
 CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
 
 [agents.git_operator]
@@ -256,16 +271,22 @@ enabled = true
 [plugins."chrome@openai-bundled"]
 enabled = true
 
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 
 [marketplaces.openai-bundled]
-last_updated = "2026-06-11T00:11:57Z"
+last_updated = "2026-06-30T16:24:03Z"
 source_type = "local"
 source = "/Users/okash1n/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-06-01T18:35:51Z"
+last_updated = "2026-07-01T06:36:10Z"
 source_type = "local"
 source = "/Users/okash1n/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
@@ -275,6 +296,7 @@ appearanceDarkCodeThemeId = "dracula"
 usePointerCursors = true
 reduced-motion-preference = "on"
 keepRemoteControlAwakeWhilePluggedIn = true
+followUpQueueMode = "queue"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#ff79c6"
