@@ -85,6 +85,8 @@ GitHub Copilot CLI を本格利用するにあたり、claude-code-starter-kit �
   - 現 `config.json` の各キーは現行リファレンスと突き合わせて監査し、ユーザー意図の設定（`includeCoAuthoredBy` 等）は正しい置き場（settings.json または実機 config.json）へ移す。表記が snake_case / camelCase 混在している点も正式キー名に正す。
 - リスクと対策: hooks 移設で kb-mcp session-end hook が壊れないことを実装時に必ず確認する（設定ロードは `copilot --list-env` で、hook 発火はテストセッションで確認）。
 
+> 実装時追記（2026-07-06）: 実装開始時点で CLI 自身が設定移行を完了しており、`~/.copilot/config.json` は既に自動管理の実ファイル、`~/.copilot/settings.json` は CLI 生成の実ファイルになっていた（設計時の「settings.json 不在」から状況が変化）。このため本節の実作業は「CLI 生成の settings.json を是正した上で宣言的管理（symlink）に置き換え、repo 側 config.json を削除する」となった。`--list-env` フラグは現行 CLI に存在しなかったため、設定ロードの確認は非対話実行とセッションステート（model 反映）・ログ（hook 発火）で行った。また移植 skill 名はビルトイン `/security-review` コマンドとの衝突を避けるため `security-checklist` に変更した。kb-mcp の hook スクリプトは実機から消えており（3 月以降のアンインストールとみられる。今回の移行とは無関係の既存問題）、hook は存在チェック付きガードに変更して保全した。
+
 ### D. 配備と検証
 
 - `copilot/skills/.gitignore` に `!tdd` `!tdd/**` `!security-review` `!security-review/**` を追記する（ホワイトリスト方式のため、忘れると git 管理から漏れる）。

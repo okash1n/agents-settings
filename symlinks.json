@@ -47,8 +47,8 @@
       "kind": "file"
     },
     {
-      "target": "~/.copilot/config.json",
-      "source": "copilot/config.json",
+      "target": "~/.copilot/settings.json",
+      "source": "copilot/settings.json",
       "kind": "file"
     },
     {
