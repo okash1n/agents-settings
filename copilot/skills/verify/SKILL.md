@@ -1,6 +1,7 @@
 ---
 name: verify
 description: Run repository verification in a fixed order before commit or PR work. Use when the user asks to verify changes, run pre-commit or pre-PR checks, or produce a concise readiness report.
+argument-hint: "[quick|full|pre-commit|pre-pr]"
 compatibility: codex,copilot
 ---
 
@@ -59,12 +60,23 @@ If no argument is given, treat it as `full`.
 - If the stack is not JavaScript/TypeScript, also look for the nearest equivalent debug logging pattern only when it is clearly conventional in that repo.
 - Report concrete locations briefly.
 
-### 6. Git Status
+### 6. Secrets Scan
+
+- If a dedicated scanner is available in the repo or on PATH (gitleaks, trufflehog), run it against the changes.
+- Otherwise, review the added lines of `git diff` for credentials, tokens, and keys. Do not report PASS based on a repository-wide grep.
+- For deeper guidance on sensitive surfaces, follow the security-checklist skill when it is available.
+
+### 7. Git Status
 
 - Summarize uncommitted changes.
 - Summarize files changed since `HEAD`.
 
-### 7. Security Scan
+### 8. Diff Review
+
+- Show the change surface with `git diff --stat` (and `git diff HEAD~1 --name-only` when reviewing a commit).
+- Review each changed file for unintended changes, missing error handling, and potential edge cases.
+
+### 9. Security Scan
 
 - Only for `pre-pr`, run an existing security-oriented check if the repo already defines one.
 - Do not invent new external tooling.
@@ -91,7 +103,9 @@ If no argument is given, treat it as `full`.
 - Lint
 - Tests
 - Log audit
+- Secrets scan
 - Git status
+- Diff review
 
 ### `pre-commit`
 
@@ -99,6 +113,7 @@ If no argument is given, treat it as `full`.
 - Types
 - Lint
 - Targeted tests or the smallest meaningful test set
+- Secrets scan
 - Git status
 
 ### `pre-pr`
@@ -117,8 +132,10 @@ Build:    [OK/FAIL/N/A]
 Types:    [OK/X errors/N/A]
 Lint:     [OK/X issues/N/A]
 Tests:    [X/Y passed, Z% coverage/N/A]
+Secrets:  [OK/X found/N/A]
 Security: [OK/X found/N/A]
 Logs:     [OK/X found]
+Diff:     [X files changed]
 
 Ready for PR: [YES/NO]
 ```
@@ -128,4 +145,4 @@ After the summary, list only the critical issues with short fix suggestions.
 ## Compatibility
 
 - Codex: use the same workflow so verification stays aligned with Copilot.
-- Copilot: keep this as a skill instead of relying on `.claude/commands`, so starter-kit managed Claude commands stay untouched.
+- Copilot: keep this as a skill instead of relying on `.claude/commands`, so starter-kit managed Claude commands stay untouched. The built-in `/security-review` command and the security-checklist skill can serve as the security-oriented check in `pre-pr`.
